@@ -7,7 +7,7 @@ def _replace_builtins(input_string):
     """ replaces CUDA built-in variables with OpenCL built-in function equivalents """
     def repl(x):
         builtins = {'threadIdx':'get_local_id', 'blockIdx':'get_group_id',
-                    'blockDim':'get_group_size', 'gridDim': 'get_num_groups'}
+                    'blockDim':'get_local_size', 'gridDim': 'get_num_groups'}
         dims = {'x':'0', 'y':'1', 'z':'2'}
         return builtins[x.group(1)] + '(' + dims[x.group(2)] + ')'
     return re.sub(r'(threadIdx|blockIdx|blockDim|gridDim)\.(x|y|z)', repl, input_string)

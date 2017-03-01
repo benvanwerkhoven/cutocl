@@ -2,7 +2,7 @@ from cutocl import cutocl
 
 def test_replace_builtins():
     input_string = " threadIdx.z blockDim.x gridDim.x blockIdx.y "
-    reference = " get_local_id(2) get_group_size(0) get_num_groups(0) get_group_id(1) "
+    reference = " get_local_id(2) get_local_size(0) get_num_groups(0) get_group_id(1) "
     answer = cutocl._replace_builtins(input_string)
     print(answer)
     assert answer == reference
